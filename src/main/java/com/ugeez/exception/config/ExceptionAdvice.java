@@ -16,8 +16,8 @@ public class ExceptionAdvice {
     public UGJsonResponse ugException(UGException e) {
         if (e.getCode() == UGExceptionType.SYSTEM_ERROR.getCode()) {
             // TODO: 保存e到LOG
+            log.info(e.toString());
         }
-        log.info(e.toString());
         return UGJsonResponse.error(e);
     }
 
@@ -26,6 +26,7 @@ public class ExceptionAdvice {
     public UGJsonResponse exception(Exception exception) {
         long timestamps = System.currentTimeMillis();
         // TODO: 保存exception(带timestamps)到LOG
+        log.info("" + timestamps, exception.toString());
         UGException e = new UGException(UGExceptionType.OTHER_ERROR, timestamps);
         return UGJsonResponse.error(e);
     }

@@ -31,15 +31,19 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice {
                 MediaType.APPLICATION_JSON
         )) {
             if (body instanceof UGJsonResponse) {
+                // 有出错的情况
                 response.setStatusCode(HttpStatus.valueOf(
                         ((UGJsonResponse) body).getCode()
                 ));
                 return body;
             } else {
+                // 正常返回数据的情况
                 response.setStatusCode(HttpStatus.OK);
-                return UGJsonResponse.success(body);
+                UGJsonResponse result = UGJsonResponse.success(body);
+                return result;
             }
         }
+        log.info("非json情况:" + body);
         return body;
     }
 }

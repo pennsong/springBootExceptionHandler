@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MainController {
-    @RequestMapping(value = "test/{v}", produces = "application/json")
-    @ResponseBody
-    public String test(@PathVariable String v) {
+    @RequestMapping(value = "test/{v}")
+    public UGJsonResponse test(@PathVariable String v) {
         switch (v) {
             case "SYSTEM_ERROR":
                 throw new UGException(UGExceptionType.SYSTEM_ERROR);
@@ -22,6 +21,6 @@ public class MainController {
             default:
 
         }
-        return "OK";
+        return UGJsonResponse.success("OK");
     }
 }
