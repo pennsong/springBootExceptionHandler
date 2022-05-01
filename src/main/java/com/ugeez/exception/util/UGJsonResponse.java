@@ -21,6 +21,15 @@ public class UGJsonResponse {
         return response;
     }
 
+    public static UGJsonResponse globalError(int statusCode, String message) {
+        UGJsonResponse response = new UGJsonResponse();
+        response.setOk(false);
+        response.setCode(statusCode);
+        response.setMessage(message);
+        response.setTimestamp(System.currentTimeMillis());
+        return response;
+    }
+
     public static UGJsonResponse success() {
         UGJsonResponse response = new UGJsonResponse();
         response.setOk(true);
